@@ -138,6 +138,9 @@ func handleClient(client *Client) {
 		lineStr := string(line)
 		if strings.HasPrefix(lineStr, "tell ") {
 			elems := strings.Split(lineStr, "'")
+			if len(elems) < 3 {
+				continue
+			}
 			chanName := elems[1]
 			msg := strings.Join(elems[2:], "'")
 			fmt.Println("channame: " + chanName)
