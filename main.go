@@ -134,7 +134,11 @@ func handleClient(client *Client) {
 	connectToChannel(client, "oop")
 
 	for {
-		line, _, _ := client.reader.ReadLine()
+		line, _, err := client.reader.ReadLine()
+		if err != nil {
+			log.Print(err)
+			return
+		}
 		lineStr := string(line)
 		if strings.HasPrefix(lineStr, "tell ") {
 			elems := strings.Split(lineStr, "'")
